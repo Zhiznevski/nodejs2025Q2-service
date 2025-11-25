@@ -1,10 +1,10 @@
-import { IsString } from 'class-validator';
+import { IsString, MinLength } from 'class-validator';
 
-export class UpdateUserDto {
-    @IsString()
-    readonly oldPassword: string;
+export class UpdatePasswordDto {
+  @IsString()
+  readonly oldPassword: string;
 
-    @IsString()
-    readonly newPassword: string;
-
+  @IsString()
+  @MinLength(6)
+  readonly newPassword: string;
 }
