@@ -6,6 +6,6 @@ export class CreateUserDto {
   readonly login: string;
 
   @IsString()
-  @MinLength(6)
+  @MinLength(4)
   readonly password: string;
 }
