@@ -1,12 +1,11 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Artist } from './interfaces/artists.interface';
-import { CreateArtistDto } from './dto/create-artist.dto';
+import { CreateUpdateArtistDto } from './dto/create-update-artist.dto';
 import { generateId } from 'src/utils/uuid';
-import { UpdateArtistDto } from './dto/update-artist.dto';
 
 @Injectable()
 export class ArtistsService {
-  //TODO:  Should inject album service to delete(set null I guess) atristId from corresponding album
+  //TODO:  Should inject album service to delete(set null I guess) artistId from corresponding album and delete from favoirites as well
   private readonly artists: Artist[] = [];
 
   async findAll() {
@@ -21,7 +20,7 @@ export class ArtistsService {
     return artist;
   }
 
-  async create(artistDto: CreateArtistDto) {
+  async create(artistDto: CreateUpdateArtistDto) {
     const id = generateId();
     const { grammy, name } = artistDto;
     const createdArtist: Artist = {
@@ -33,7 +32,7 @@ export class ArtistsService {
     return createdArtist;
   }
 
-  async update(id: string, artistDto: UpdateArtistDto) {
+  async update(id: string, artistDto: CreateUpdateArtistDto) {
     const artist = await this.findOne(id);
     const artistIndex = this.artists.findIndex((artist) => artist.id === id);
 
