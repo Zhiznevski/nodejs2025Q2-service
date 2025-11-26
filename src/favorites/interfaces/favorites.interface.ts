@@ -3,9 +3,9 @@ import { Artist } from 'src/artists/interfaces/artists.interface';
 import { Track } from 'src/tracks/interfaces/track.interface';
 
 export interface Favorites {
-  artists: string[]; // favorite artists ids
-  albums: string[]; // favorite albums ids
-  tracks: string[]; // favorite tracks ids
+  artists: string[];
+  albums: string[];
+  tracks: string[];
 }
 
 export interface GetFavoritesResponse {

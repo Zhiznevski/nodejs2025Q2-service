@@ -7,7 +7,6 @@ import { AlbumsService } from 'src/albums/albums.service';
 
 @Injectable()
 export class ArtistsService {
-  //TODO:  Should inject album service to delete(set null I guess) artistId from corresponding album and delete from favoirites as well
   constructor(
     private readonly tracksService: TracksService,
     private readonly albumsService: AlbumsService,

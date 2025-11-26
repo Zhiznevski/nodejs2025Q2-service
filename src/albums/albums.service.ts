@@ -6,7 +6,6 @@ import { TracksService } from 'src/tracks/tracks.service';
 
 @Injectable()
 export class AlbumsService {
-  //TODO:  Should inject other staff ( favorite and entities )
   constructor(private readonly tracksService: TracksService) {}
   private readonly albums: Album[] = [];
 

@@ -19,7 +19,11 @@ export class FavoritesService {
     private readonly albumsService: AlbumsService,
     private readonly tracksService: TracksService,
   ) {}
-  private readonly favorites: Favorites;
+  private readonly favorites: Favorites = {
+    albums: [],
+    artists: [],
+    tracks: [],
+  };
 
   async getFavorites(): Promise<GetFavoritesResponse> {
     const [albums, artists, tracks] = await Promise.all([
@@ -31,21 +35,67 @@ export class FavoritesService {
   }
 
   async addTrack(id: string): Promise<AddRecordToFavoritesResponse> {
-    const track = await this.tracksService.findOne(id);
-    if (!track) {
-      throw new UnprocessableEntityException(
-        "The track doesn't exist in favorites",
-      );
+    try {
+      const track = await this.tracksService.findOne(id);
+      this.favorites.tracks.push(track.id);
+      return { message: 'The track is successfully added to favorites' };
+    } catch (e) {
+      if (e instanceof NotFoundException) {
+        throw new UnprocessableEntityException(
+          "The track doesn't exist in favorites",
+        );
+      }
     }
-    this.favorites.tracks.push(track.id);
-    return { message: 'The track is successfully added to favorites' };
   }
 
   async removeTrack(id: string) {
-    const trackIdIndex = this.favorites.tracks.findIndex((el) => el === id);
-    if (trackIdIndex === -1) {
+    const index = this.favorites.tracks.findIndex((el) => el === id);
+    if (index === -1) {
       throw new NotFoundException('The track is not found in favorites');
     }
-    this.favorites.tracks.splice(trackIdIndex, 1);
+    this.favorites.tracks.splice(index, 1);
+  }
+
+  async addAlbum(id: string): Promise<AddRecordToFavoritesResponse> {
+    try {
+      const album = await this.albumsService.findOne(id);
+      this.favorites.albums.push(album.id);
+      return { message: 'The album is successfully added to favorites' };
+    } catch (e) {
+      if (e instanceof NotFoundException) {
+        throw new UnprocessableEntityException(
+          "The album doesn't exist in favorites",
+        );
+      }
+    }
+  }
+  async removeAlbum(id: string) {
+    const index = this.favorites.albums.findIndex((el) => el === id);
+    if (index === -1) {
+      throw new NotFoundException('The album is not found in favorites');
+    }
+    this.favorites.albums.splice(index, 1);
+  }
+
+  async addArtist(id: string): Promise<AddRecordToFavoritesResponse> {
+    try {
+      const artist = await this.artistsService.findOne(id);
+      this.favorites.artists.push(artist.id);
+      return { message: 'The artist is successfully added to favorites' };
+    } catch (e) {
+      if (e instanceof NotFoundException) {
+        throw new UnprocessableEntityException(
+          "The artist doesn't exist in favorites",
+        );
+      }
+    }
+  }
+
+  async removeArtist(id: string) {
+    const index = this.favorites.artists.findIndex((el) => el === id);
+    if (index === -1) {
+      throw new NotFoundException('The artist is not found in favorites');
+    }
+    this.favorites.artists.splice(index, 1);
   }
 }

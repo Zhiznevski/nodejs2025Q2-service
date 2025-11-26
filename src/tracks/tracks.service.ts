@@ -5,7 +5,6 @@ import { generateId } from 'src/utils/uuid';
 
 @Injectable()
 export class TracksService {
-  //TODO:  Should inject other staff ( favorite and entities )
   private readonly tracks: Track[] = [];
 
   async findAll() {
