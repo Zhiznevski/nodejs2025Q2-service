@@ -2,10 +2,12 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { Album } from './interfaces/albums.interface';
 import { CreateUpdateAlbumDto } from './dto/create-update-album.dto';
 import { generateId } from 'src/utils/uuid';
+import { TracksService } from 'src/tracks/tracks.service';
 
 @Injectable()
 export class AlbumsService {
   //TODO:  Should inject other staff ( favorite and entities )
+  constructor(private readonly tracksService: TracksService) {}
   private readonly albums: Album[] = [];
 
   async findAll() {
@@ -50,8 +52,18 @@ export class AlbumsService {
   }
 
   async remove(id: string) {
-    await this.findOne(id);
+    const album = await this.findOne(id);
     const albumnIndex = this.albums.findIndex((album) => album.id === id);
     this.albums.splice(albumnIndex, 1);
+
+    await this.tracksService.unlinkAlbum(album.id);
+  }
+
+  async unlinkArtist(artistId: string) {
+    for (const album of this.albums) {
+      if (album.artistId === artistId) {
+        album.artistId = null;
+      }
+    }
   }
 }

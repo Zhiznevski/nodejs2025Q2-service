@@ -57,4 +57,20 @@ export class TracksService {
     const trackIndex = this.tracks.findIndex((track) => track.id === id);
     this.tracks.splice(trackIndex, 1);
   }
+
+  async unlinkAlbum(albumId: string) {
+    for (const track of this.tracks) {
+      if (track.albumId === albumId) {
+        track.albumId = null;
+      }
+    }
+  }
+
+  async unlinkArtist(artistId: string) {
+    for (const track of this.tracks) {
+      if (track.artistId === artistId) {
+        track.artistId = null;
+      }
+    }
+  }
 }

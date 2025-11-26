@@ -42,7 +42,7 @@ export class AlbumsController {
 
   @Delete(':id')
   @HttpCode(204)
-  remove(@Param('id', ParseUUIDPipe) id: string) {
-    return this.albumsService.remove(id);
+  async remove(@Param('id', ParseUUIDPipe) id: string) {
+    await this.albumsService.remove(id);
   }
 }
