@@ -26,6 +26,10 @@ export class ArtistsService {
     return artist;
   }
 
+  async findByIds(ids: string[]) {
+    return this.artists.filter((artist) => ids.includes(artist.id));
+  }
+
   async create(artistDto: CreateUpdateArtistDto) {
     const id = generateId();
     const { grammy, name } = artistDto;

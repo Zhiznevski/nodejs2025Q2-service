@@ -22,6 +22,10 @@ export class AlbumsService {
     return album;
   }
 
+  async findByIds(ids: string[]) {
+    return this.albums.filter((album) => ids.includes(album.id));
+  }
+
   async create(albumDto: CreateUpdateAlbumDto) {
     const id = generateId();
     const { artistId, name, year } = albumDto;

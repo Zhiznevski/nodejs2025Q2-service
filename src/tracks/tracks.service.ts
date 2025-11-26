@@ -20,6 +20,10 @@ export class TracksService {
     return track;
   }
 
+  async findByIds(ids: string[]) {
+    return this.tracks.filter((track) => ids.includes(track.id));
+  }
+
   async create(trackDto: CreateUpdateTrackDto) {
     const id = generateId();
     const { albumId, artistId, duration, name } = trackDto;
