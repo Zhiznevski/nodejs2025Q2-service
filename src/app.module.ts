@@ -3,12 +3,19 @@ import { UsersController } from './users/users.controller';
 import { UsersService } from './users/users.service';
 import { ArtistsController } from './artists/artists.controller';
 import { ArtistsService } from './artists/artists.service';
-import { AlbumsService } from './albumns/albums.service';
-import { AlbumsController } from './albumns/albums.controller';
+import { AlbumsService } from './albums/albums.service';
+import { AlbumsController } from './albums/albums.controller';
+import { TracksController } from './tracks/tracks.controller';
+import { TracksService } from './tracks/tracks.service';
 
 @Module({
   imports: [],
-  controllers: [UsersController, ArtistsController, AlbumsController],
-  providers: [UsersService, ArtistsService, AlbumsService],
+  controllers: [
+    UsersController,
+    ArtistsController,
+    AlbumsController,
+    TracksController,
+  ],
+  providers: [UsersService, ArtistsService, AlbumsService, TracksService],
 })
 export class AppModule {}
