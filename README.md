@@ -4,7 +4,7 @@
 
 - Git - [Download & Install Git](https://git-scm.com/downloads).
 - Node.js - [Download & Install Node.js](https://nodejs.org/en/download/) and the npm package manager.
-- Use v22.14.0 of node if possible
+- Use v22.14.0 (https://www.nvmnode.com/ to change node version)
 
 ## Downloading
 
