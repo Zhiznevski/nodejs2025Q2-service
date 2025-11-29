@@ -19,4 +19,4 @@ export class User {
   updatedAt: number;
 }
 
-export class UserResponse extends OmitType(User, ['password']) { }
+export class UserResponse extends OmitType(User, ['password']) {}

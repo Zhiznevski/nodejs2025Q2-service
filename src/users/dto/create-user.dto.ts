@@ -4,7 +4,7 @@ import { ApiProperty } from '@nestjs/swagger';
 export class CreateUserDto {
   @ApiProperty({
     minLength: 4,
-    example: "John Dory"
+    example: 'John Dory',
   })
   @IsString()
   @MinLength(4)
@@ -12,7 +12,7 @@ export class CreateUserDto {
 
   @ApiProperty({
     minLength: 4,
-    example: "Qwerty123"
+    example: 'Qwerty123',
   })
   @IsString()
   @MinLength(4)

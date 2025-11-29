@@ -3,13 +3,13 @@ import { ApiProperty } from '@nestjs/swagger';
 
 export class UpdatePasswordDto {
   @ApiProperty({
-    description: "Must match your old password"
+    description: 'Must match your old password',
   })
   @IsString()
   readonly oldPassword: string;
 
   @ApiProperty({
-    minLength: 4
+    minLength: 4,
   })
   @IsString()
   @MinLength(4)

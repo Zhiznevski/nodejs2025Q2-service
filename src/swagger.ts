@@ -1,8 +1,9 @@
 import { INestApplication } from '@nestjs/common';
-import { DocumentBuilder, SwaggerModule, SwaggerDocumentOptions } from '@nestjs/swagger';
-
-
-
+import {
+  DocumentBuilder,
+  SwaggerModule,
+  SwaggerDocumentOptions,
+} from '@nestjs/swagger';
 
 export const setupSwagger = (app: INestApplication) => {
   const config = new DocumentBuilder()
@@ -12,14 +13,11 @@ export const setupSwagger = (app: INestApplication) => {
     .build();
 
   const options: SwaggerDocumentOptions = {
-    operationIdFactory: (
-      _: string,
-      methodKey: string
-    ) => methodKey,
+    operationIdFactory: (_: string, methodKey: string) => methodKey,
   };
 
   const document = SwaggerModule.createDocument(app, config, options);
   SwaggerModule.setup('doc', app, document, {
-    yamlDocumentUrl: "swagger/yaml"
+    yamlDocumentUrl: 'swagger/yaml',
   });
-}
+};
