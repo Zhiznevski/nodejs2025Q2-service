@@ -1,19 +1,20 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { Album } from 'src/albums/interfaces/albums.interface';
 import { Artist } from 'src/artists/interfaces/artists.interface';
 import { Track } from 'src/tracks/interfaces/track.interface';
 
-export interface Favorites {
+export class Favorites {
   artists: string[];
   albums: string[];
   tracks: string[];
 }
 
-export interface GetFavoritesResponse {
+export class GetFavoritesResponse {
   artists: Artist[];
   albums: Album[];
   tracks: Track[];
 }
 
-export interface AddRecordToFavoritesResponse {
+export class AddRecordToFavoritesResponse {
   message: string;
 }
