@@ -12,11 +12,7 @@ export const setupSwagger = (app: INestApplication) => {
     .setVersion('1.0')
     .build();
 
-  const options: SwaggerDocumentOptions = {
-    operationIdFactory: (_: string, methodKey: string) => methodKey,
-  };
-
-  const document = SwaggerModule.createDocument(app, config, options);
+  const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('doc', app, document, {
     yamlDocumentUrl: 'doc/swagger/yaml',
   });

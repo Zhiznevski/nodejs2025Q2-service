@@ -24,7 +24,7 @@ import { AlbumResponse } from './interfaces/albums.interface';
 
 @Controller('/album')
 export class AlbumsController {
-  constructor(private readonly albumsService: AlbumsService) {}
+  constructor(private readonly albumsService: AlbumsService) { }
 
   @Post()
   @HttpCode(201)
@@ -64,6 +64,7 @@ export class AlbumsController {
   }
 
   @Put(':id')
+  @ApiOperation({ summary: 'Update the album' })
   @ApiOkResponse({
     description: 'The album has been successfully updated',
     type: AlbumResponse,

@@ -2,7 +2,7 @@ openapi: 3.0.0
 paths:
   /user:
     post:
-      operationId: create
+      operationId: UsersController_create
       parameters: []
       requestBody:
         required: true
@@ -23,7 +23,7 @@ paths:
       tags:
         - Users
     get:
-      operationId: findAll
+      operationId: UsersController_findAll
       parameters: []
       responses:
         '200':
@@ -39,7 +39,7 @@ paths:
         - Users
   /user/{id}:
     get:
-      operationId: findOne
+      operationId: UsersController_findOne
       parameters:
         - name: id
           required: true
@@ -61,7 +61,7 @@ paths:
       tags:
         - Users
     put:
-      operationId: updatePassword
+      operationId: UsersController_updatePassword
       parameters:
         - name: id
           required: true
@@ -91,7 +91,7 @@ paths:
       tags:
         - Users
     delete:
-      operationId: remove
+      operationId: UsersController_remove
       parameters:
         - name: id
           required: true
@@ -110,7 +110,7 @@ paths:
         - Users
   /artist:
     post:
-      operationId: create
+      operationId: ArtistsController_create
       parameters: []
       requestBody:
         required: true
@@ -131,7 +131,7 @@ paths:
       tags:
         - Artists
     get:
-      operationId: findAll
+      operationId: ArtistsController_findAll
       parameters: []
       responses:
         '200':
@@ -147,7 +147,7 @@ paths:
         - Artists
   /artist/{id}:
     get:
-      operationId: findOne
+      operationId: ArtistsController_findOne
       parameters:
         - name: id
           required: true
@@ -169,7 +169,7 @@ paths:
       tags:
         - Artists
     put:
-      operationId: update
+      operationId: ArtistsController_update
       parameters:
         - name: id
           required: true
@@ -193,10 +193,11 @@ paths:
           description: The id is invalid (not uuid)
         '404':
           description: The id doesn't exist
+      summary: Update the artist
       tags:
         - Artists
     delete:
-      operationId: remove
+      operationId: ArtistsController_remove
       parameters:
         - name: id
           required: true
@@ -215,7 +216,7 @@ paths:
         - Artists
   /track:
     post:
-      operationId: create
+      operationId: TracksController_create
       parameters: []
       requestBody:
         required: true
@@ -234,7 +235,7 @@ paths:
       tags:
         - Tracks
     get:
-      operationId: findAll
+      operationId: TracksController_findAll
       parameters: []
       responses:
         '200':
@@ -250,7 +251,7 @@ paths:
         - Tracks
   /track/{id}:
     get:
-      operationId: findOne
+      operationId: TracksController_findOne
       parameters:
         - name: id
           required: true
@@ -272,7 +273,7 @@ paths:
       tags:
         - Tracks
     put:
-      operationId: update
+      operationId: TracksController_update
       parameters:
         - name: id
           required: true
@@ -296,10 +297,11 @@ paths:
           description: The id is invalid (not uuid)
         '404':
           description: The id doesn't exist
+      summary: Update the track
       tags:
         - Tracks
     delete:
-      operationId: remove
+      operationId: TracksController_remove
       parameters:
         - name: id
           required: true
@@ -318,7 +320,7 @@ paths:
         - Tracks
   /album:
     post:
-      operationId: create
+      operationId: AlbumsController_create
       parameters: []
       requestBody:
         required: true
@@ -339,7 +341,7 @@ paths:
       tags:
         - Albums
     get:
-      operationId: findAll
+      operationId: AlbumsController_findAll
       parameters: []
       responses:
         '200':
@@ -355,7 +357,7 @@ paths:
         - Albums
   /album/{id}:
     get:
-      operationId: findOne
+      operationId: AlbumsController_findOne
       parameters:
         - name: id
           required: true
@@ -377,7 +379,7 @@ paths:
       tags:
         - Albums
     put:
-      operationId: update
+      operationId: AlbumsController_update
       parameters:
         - name: id
           required: true
@@ -401,10 +403,11 @@ paths:
           description: The id is invalid (not uuid)
         '404':
           description: The id doesn't exist
+      summary: Update the album
       tags:
         - Albums
     delete:
-      operationId: remove
+      operationId: AlbumsController_remove
       parameters:
         - name: id
           required: true
@@ -423,7 +426,7 @@ paths:
         - Albums
   /favs:
     get:
-      operationId: getFavorites
+      operationId: FavoritesController_getFavorites
       parameters: []
       responses:
         '200':
@@ -439,7 +442,7 @@ paths:
         - Favorites
   /favs/track/{id}:
     post:
-      operationId: addTrack
+      operationId: FavoritesController_addTrack
       parameters:
         - name: id
           required: true
@@ -461,7 +464,7 @@ paths:
       tags:
         - Favorites
     delete:
-      operationId: removeTrack
+      operationId: FavoritesController_removeTrack
       parameters:
         - name: id
           required: true
@@ -480,7 +483,7 @@ paths:
         - Favorites
   /favs/album/{id}:
     post:
-      operationId: addAlbum
+      operationId: FavoritesController_addAlbum
       parameters:
         - name: id
           required: true
@@ -502,7 +505,7 @@ paths:
       tags:
         - Favorites
     delete:
-      operationId: removeAlbum
+      operationId: FavoritesController_removeAlbum
       parameters:
         - name: id
           required: true
@@ -521,7 +524,7 @@ paths:
         - Favorites
   /favs/artist/{id}:
     post:
-      operationId: addArtist
+      operationId: FavoritesController_addArtist
       parameters:
         - name: id
           required: true
@@ -543,7 +546,7 @@ paths:
       tags:
         - Favorites
     delete:
-      operationId: removeArtist
+      operationId: FavoritesController_removeArtist
       parameters:
         - name: id
           required: true

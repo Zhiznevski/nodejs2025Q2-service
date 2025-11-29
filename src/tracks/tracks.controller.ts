@@ -24,7 +24,7 @@ import { TrackResponse } from './interfaces/track.interface';
 
 @Controller('/track')
 export class TracksController {
-  constructor(private readonly tracksService: TracksService) {}
+  constructor(private readonly tracksService: TracksService) { }
 
   @Post()
   @HttpCode(201)
@@ -61,6 +61,7 @@ export class TracksController {
   }
 
   @Put(':id')
+  @ApiOperation({ summary: 'Update the track' })
   @ApiOkResponse({
     description: 'The track has been successfully updated',
     type: TrackResponse,

@@ -23,7 +23,7 @@ import { CreateUpdateArtistDto } from './dto/create-update-artist.dto';
 import { ArtistResponse } from './interfaces/artists.interface';
 @Controller('/artist')
 export class ArtistsController {
-  constructor(private readonly artistsService: ArtistsService) {}
+  constructor(private readonly artistsService: ArtistsService) { }
 
   @Post()
   @HttpCode(201)
@@ -63,6 +63,7 @@ export class ArtistsController {
   }
 
   @Put(':id')
+  @ApiOperation({ summary: 'Update the artist' })
   @ApiOkResponse({
     description: 'The artist has been successfully updated',
     type: ArtistResponse,
