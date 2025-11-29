@@ -8,7 +8,6 @@ export class CreateUpdateTrackDto {
     minLength: 2,
     example: 'I wanna be yours',
   })
-
   readonly name: string;
 
   @IsInt()

@@ -17,5 +17,4 @@ export class Track {
   duration: number;
 }
 
-
-export class TrackResponse extends Track { }
+export class TrackResponse extends Track {}

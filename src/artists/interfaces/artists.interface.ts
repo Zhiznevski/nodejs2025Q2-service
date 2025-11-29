@@ -1,4 +1,4 @@
-import { ApiProperty } from "@nestjs/swagger";
+import { ApiProperty } from '@nestjs/swagger';
 
 export class Artist {
   @ApiProperty()
@@ -11,4 +11,4 @@ export class Artist {
   grammy: boolean;
 }
 
-export class ArtistResponse extends Artist { }
+export class ArtistResponse extends Artist {}

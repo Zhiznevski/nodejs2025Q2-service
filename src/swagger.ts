@@ -18,6 +18,6 @@ export const setupSwagger = (app: INestApplication) => {
 
   const document = SwaggerModule.createDocument(app, config, options);
   SwaggerModule.setup('doc', app, document, {
-    yamlDocumentUrl: 'swagger/yaml',
+    yamlDocumentUrl: 'doc/swagger/yaml',
   });
 };

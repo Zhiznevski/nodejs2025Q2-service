@@ -24,7 +24,7 @@ import { TrackResponse } from './interfaces/track.interface';
 
 @Controller('/track')
 export class TracksController {
-  constructor(private readonly tracksService: TracksService) { }
+  constructor(private readonly tracksService: TracksService) {}
 
   @Post()
   @HttpCode(201)

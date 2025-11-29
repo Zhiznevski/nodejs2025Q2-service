@@ -10,8 +10,13 @@ export class Favorites {
 }
 
 export class GetFavoritesResponse {
+  @ApiProperty({ type: [Artist] })
   artists: Artist[];
+
+  @ApiProperty({ type: [Album] })
   albums: Album[];
+
+  @ApiProperty({ type: [Track] })
   tracks: Track[];
 }
 
