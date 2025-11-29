@@ -4,6 +4,7 @@
 
 - Git - [Download & Install Git](https://git-scm.com/downloads).
 - Node.js - [Download & Install Node.js](https://nodejs.org/en/download/) and the npm package manager.
+- Use v22.14.0 of node if possible
 
 ## Downloading
 
@@ -23,6 +24,7 @@ npm install
 npm start
 ```
 
+Create .env file with all necessery env variable ( see .env.example)
 After starting the app on port (4000 as default) you can open
 in your browser OpenAPI documentation by typing http://localhost:4000/doc/.
 For more information about OpenAPI/Swagger please visit https://swagger.io/.
