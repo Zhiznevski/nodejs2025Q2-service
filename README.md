@@ -15,7 +15,7 @@ git clone {repository URL}
 ## Installing NPM modules
 
 ```
-npm install
+npm i --legacy-peer-deps
 ```
 
 ## Running application
