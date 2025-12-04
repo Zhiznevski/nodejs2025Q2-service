@@ -1,4 +1,5 @@
-import { User, UserResponse } from '../interfaces/user.interface';
+import { UserResponse } from '../interfaces/user.interface';
+import { User } from '../user.entity';
 
 export const mapUserToUserResponse = (user: User): UserResponse => ({
   id: user.id,

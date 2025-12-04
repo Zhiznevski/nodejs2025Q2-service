@@ -1,12 +1,26 @@
+
 import { Module } from '@nestjs/common';
+import { DataSource } from 'typeorm';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
 import { ArtistsModule } from './artists/artists.module';
 import { TracksModule } from './tracks/tracks.module';
 import { AlbumsModule } from './albums/albums.module';
 import { FavoritesModule } from './favorites/favorites.module';
+import { User } from './users/user.entity';
 
 @Module({
   imports: [
+    TypeOrmModule.forRoot({
+      type: "postgres",
+      host: process.env.DB_HOST,
+      port: Number(process.env.DB_PORT),
+      username: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_NAME,
+      entities: [User],
+      synchronize: true
+    }),
     UsersModule,
     ArtistsModule,
     AlbumsModule,
@@ -14,4 +28,6 @@ import { FavoritesModule } from './favorites/favorites.module';
     FavoritesModule,
   ],
 })
-export class AppModule {}
+export class AppModule {
+  constructor(private dataSource: DataSource) { }
+}
