@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Album } from 'src/albums/interfaces/albums.interface';
-import { Artist } from 'src/artists/interfaces/artists.interface';
+import { ArtistResponseDto } from 'src/artists/interfaces/artistResponseDto.interface';
 import { Track } from 'src/tracks/interfaces/track.interface';
 
 export class Favorites {
@@ -10,8 +10,8 @@ export class Favorites {
 }
 
 export class GetFavoritesResponse {
-  @ApiProperty({ type: [Artist] })
-  artists: Artist[];
+  @ApiProperty({ type: [ArtistResponseDto] })
+  artists: ArtistResponseDto[];
 
   @ApiProperty({ type: [Album] })
   albums: Album[];

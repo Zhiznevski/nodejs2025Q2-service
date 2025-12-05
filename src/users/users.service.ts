@@ -18,7 +18,7 @@ export class UsersService {
     private readonly usersRepository: Repository<User>,
   ) {}
 
-  private async findById(id: string): Promise<User> {
+  private async _findById(id: string): Promise<User> {
     const user = await this.usersRepository.findOneBy({ id });
     if (!user) {
       throw new NotFoundException('The user is not found');
@@ -32,17 +32,16 @@ export class UsersService {
   }
 
   async findOne(id: string): Promise<UserResponseDto> {
-    const user = await this.findById(id);
+    const user = await this._findById(id);
     return mapUserToUserResponseDto(user);
   }
 
   async create(userDto: CreateUserDto): Promise<UserResponseDto> {
     const { login, password } = userDto;
-    const user = {
+    const createdUser = await this.usersRepository.save({
       login,
       password,
-    };
-    const createdUser = await this.usersRepository.save(user);
+    });
     return mapUserToUserResponseDto(createdUser);
   }
 
@@ -50,7 +49,7 @@ export class UsersService {
     id: string,
     userDto: UpdatePasswordDto,
   ): Promise<UserResponseDto> {
-    const user = await this.findById(id);
+    const user = await this._findById(id);
     const { oldPassword, newPassword } = userDto;
     if (user?.password !== oldPassword) {
       throw new ForbiddenException("Passwords don't match");
@@ -65,7 +64,7 @@ export class UsersService {
   }
 
   async remove(id: string): Promise<void> {
-    await this.findById(id);
+    await this._findById(id);
     await this.usersRepository.delete(id);
   }
 }

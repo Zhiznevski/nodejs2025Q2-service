@@ -20,7 +20,7 @@ import {
 } from '@nestjs/swagger';
 import { ArtistsService } from './artists.service';
 import { CreateUpdateArtistDto } from './dto/create-update-artist.dto';
-import { ArtistResponse } from './interfaces/artists.interface';
+import { ArtistResponseDto } from './interfaces/artistResponseDto.interface';
 @Controller('/artist')
 export class ArtistsController {
   constructor(private readonly artistsService: ArtistsService) {}
@@ -31,7 +31,7 @@ export class ArtistsController {
   @ApiBody({ type: CreateUpdateArtistDto })
   @ApiCreatedResponse({
     description: 'The artist has been successfully created',
-    type: ArtistResponse,
+    type: ArtistResponseDto,
   })
   @ApiBadRequestResponse({
     description: 'The body does not contain required fields',
@@ -44,7 +44,7 @@ export class ArtistsController {
   @ApiOperation({ summary: 'Get all artists' })
   @ApiOkResponse({
     description: 'The list of artists have been successfully retrieved',
-    type: [ArtistResponse],
+    type: [ArtistResponseDto],
   })
   findAll() {
     return this.artistsService.findAll();
@@ -54,7 +54,7 @@ export class ArtistsController {
   @ApiOperation({ summary: 'Get single artist' })
   @ApiOkResponse({
     description: 'The artist has been successfully retrieved',
-    type: ArtistResponse,
+    type: ArtistResponseDto,
   })
   @ApiBadRequestResponse({ description: 'The id is invalid (not uuid)' })
   @ApiNotFoundResponse({ description: "The id doesn't exist" })
@@ -66,7 +66,7 @@ export class ArtistsController {
   @ApiOperation({ summary: 'Update the artist' })
   @ApiOkResponse({
     description: 'The artist has been successfully updated',
-    type: ArtistResponse,
+    type: ArtistResponseDto,
   })
   @ApiBadRequestResponse({ description: 'The id is invalid (not uuid)' })
   @ApiNotFoundResponse({ description: "The id doesn't exist" })
