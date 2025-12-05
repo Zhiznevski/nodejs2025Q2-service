@@ -56,10 +56,7 @@ export class ArtistsService {
   }
 
   async remove(id: string) {
-    const artist = await this._findById(id);
+    await this._findById(id);
     await this.artistsRepository.delete(id);
-
-    await this.tracksService.unlinkArtist(artist.id);
-    await this.albumsService.unlinkArtist(artist.id);
   }
 }

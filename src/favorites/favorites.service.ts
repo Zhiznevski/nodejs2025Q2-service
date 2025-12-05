@@ -9,7 +9,6 @@ import { ArtistsService } from 'src/artists/artists.service';
 import {
   AddRecordToFavoritesResponse,
   Favorites,
-  GetFavoritesResponse,
 } from './interfaces/favorites.interface';
 
 @Injectable()
@@ -25,7 +24,7 @@ export class FavoritesService {
     tracks: [],
   };
 
-  async getFavorites(): Promise<GetFavoritesResponse> {
+  async getFavorites() {
     const [albums, artists, tracks] = await Promise.all([
       this.albumsService.findByIds(this.favorites.albums),
       this.artistsService.findByIds(this.favorites.artists),

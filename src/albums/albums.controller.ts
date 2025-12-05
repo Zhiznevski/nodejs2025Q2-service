@@ -20,11 +20,11 @@ import {
 } from '@nestjs/swagger';
 import { CreateUpdateAlbumDto } from './dto/create-update-album.dto';
 import { AlbumsService } from './albums.service';
-import { AlbumResponse } from './interfaces/albums.interface';
+import { AlbumResponseDto } from './interfaces/albumResponseDto.interface';
 
 @Controller('/album')
 export class AlbumsController {
-  constructor(private readonly albumsService: AlbumsService) { }
+  constructor(private readonly albumsService: AlbumsService) {}
 
   @Post()
   @HttpCode(201)
@@ -32,7 +32,7 @@ export class AlbumsController {
   @ApiBody({ type: CreateUpdateAlbumDto })
   @ApiCreatedResponse({
     description: 'The album has been successfully created',
-    type: AlbumResponse,
+    type: AlbumResponseDto,
   })
   @ApiBadRequestResponse({
     description: 'The body does not contain required fields',
@@ -45,7 +45,7 @@ export class AlbumsController {
   @ApiOperation({ summary: 'Get all albums' })
   @ApiOkResponse({
     description: 'The list of albums have been successfully retrieved',
-    type: [AlbumResponse],
+    type: [AlbumResponseDto],
   })
   findAll() {
     return this.albumsService.findAll();
@@ -55,7 +55,7 @@ export class AlbumsController {
   @ApiOperation({ summary: 'Get single album' })
   @ApiOkResponse({
     description: 'The album has been successfully retrieved',
-    type: AlbumResponse,
+    type: AlbumResponseDto,
   })
   @ApiBadRequestResponse({ description: 'The id is invalid (not uuid)' })
   @ApiNotFoundResponse({ description: "The id doesn't exist" })
@@ -67,7 +67,7 @@ export class AlbumsController {
   @ApiOperation({ summary: 'Update the album' })
   @ApiOkResponse({
     description: 'The album has been successfully updated',
-    type: AlbumResponse,
+    type: AlbumResponseDto,
   })
   @ApiBadRequestResponse({ description: 'The id is invalid (not uuid)' })
   @ApiNotFoundResponse({ description: "The id doesn't exist" })

@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export class Album {
+export class AlbumResponseDto {
   @ApiProperty()
   id: string;
 
@@ -13,5 +13,3 @@ export class Album {
   @ApiProperty()
   artistId: string | null;
 }
-
-export class AlbumResponse extends Album {}

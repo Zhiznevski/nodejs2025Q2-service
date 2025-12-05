@@ -1,72 +1,60 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Album } from './interfaces/albums.interface';
 import { CreateUpdateAlbumDto } from './dto/create-update-album.dto';
-import { generateId } from 'src/utils/uuid';
-import { TracksService } from 'src/tracks/tracks.service';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Album } from './album.entity';
+import { In, Repository } from 'typeorm';
 
 @Injectable()
 export class AlbumsService {
-  constructor(private readonly tracksService: TracksService) {}
-  private readonly albums: Album[] = [];
+  constructor(
+    @InjectRepository(Album)
+    private readonly albumsRepository: Repository<Album>,
+  ) {}
 
-  async findAll() {
-    return this.albums;
-  }
-
-  async findOne(id: string) {
-    const album = this.albums.find((album) => album.id === id);
+  private async _findById(id: string) {
+    const album = await this.albumsRepository.findOneBy({ id });
     if (!album) {
       throw new NotFoundException('The album is not found');
     }
     return album;
   }
 
+  async findAll() {
+    return this.albumsRepository.find();
+  }
+
+  async findOne(id: string) {
+    return this._findById(id);
+  }
+
   async findByIds(ids: string[]) {
-    return this.albums.filter((album) => ids.includes(album.id));
+    return this.albumsRepository.findBy({ id: In(ids) });
   }
 
   async create(albumDto: CreateUpdateAlbumDto) {
-    const id = generateId();
     const { artistId, name, year } = albumDto;
-    const createdAlbum: Album = {
-      id,
+    return this.albumsRepository.save({
       artistId: artistId,
       name,
       year,
-    };
-    this.albums.push(createdAlbum);
-    return createdAlbum;
+    });
   }
 
   async update(id: string, albumDto: CreateUpdateAlbumDto) {
-    const album = await this.findOne(id);
-    const albumIndex = this.albums.findIndex((album) => album.id === id);
+    const album = await this._findById(id);
 
     const { artistId, name, year } = albumDto;
 
-    const updatedAlbum: Album = {
+    return this.albumsRepository.save({
       ...album,
       artistId,
       name,
       year,
-    };
-    this.albums.splice(albumIndex, 1, updatedAlbum);
-    return updatedAlbum;
+    });
   }
 
   async remove(id: string) {
-    const album = await this.findOne(id);
-    const albumnIndex = this.albums.findIndex((album) => album.id === id);
-    this.albums.splice(albumnIndex, 1);
-
-    await this.tracksService.unlinkAlbum(album.id);
-  }
-
-  async unlinkArtist(artistId: string) {
-    for (const album of this.albums) {
-      if (album.artistId === artistId) {
-        album.artistId = null;
-      }
-    }
+    await this._findById(id);
+    return this.albumsRepository.delete(id);
   }
 }
