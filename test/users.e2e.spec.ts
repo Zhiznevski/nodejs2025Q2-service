@@ -182,6 +182,7 @@ describe('Users (e2e)', () => {
       expect(validate(updatedId)).toBe(true);
       expect(createdId).toBe(updatedId);
       expect(version).toBe(2);
+      console.log(typeof createdAt, typeof updatedAt);
       expect(typeof createdAt).toBe('number');
       expect(typeof updatedAt).toBe('number');
       expect(createdAt === updatedAt).toBe(false);

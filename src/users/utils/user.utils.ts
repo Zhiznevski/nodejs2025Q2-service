@@ -1,10 +1,10 @@
-import { UserResponse } from '../interfaces/user.interface';
+import { UserResponseDto } from '../interfaces/userResponseDto.interface';
 import { User } from '../user.entity';
 
-export const mapUserToUserResponse = (user: User): UserResponse => ({
+export const mapUserToUserResponseDto = (user: User): UserResponseDto => ({
   id: user.id,
   login: user.login,
   version: user.version,
-  createdAt: user.createdAt,
-  updatedAt: user.updatedAt,
+  createdAt: user.createdAt.getTime(),
+  updatedAt: user.updatedAt.getTime(),
 });

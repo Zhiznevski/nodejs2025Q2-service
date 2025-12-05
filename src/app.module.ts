@@ -1,6 +1,5 @@
-
+import 'dotenv/config';
 import { Module } from '@nestjs/common';
-import { DataSource } from 'typeorm';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
 import { ArtistsModule } from './artists/artists.module';
@@ -12,14 +11,14 @@ import { User } from './users/user.entity';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
-      type: "postgres",
+      type: 'postgres',
       host: process.env.DB_HOST,
       port: Number(process.env.DB_PORT),
       username: process.env.DB_USER,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
       entities: [User],
-      synchronize: true
+      synchronize: true,
     }),
     UsersModule,
     ArtistsModule,
@@ -28,6 +27,4 @@ import { User } from './users/user.entity';
     FavoritesModule,
   ],
 })
-export class AppModule {
-  constructor(private dataSource: DataSource) { }
-}
+export class AppModule {}

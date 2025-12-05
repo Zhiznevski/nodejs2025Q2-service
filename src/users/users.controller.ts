@@ -22,11 +22,11 @@ import {
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdatePasswordDto } from './dto/update-user-password.dto';
-import { UserResponse } from './interfaces/user.interface';
+import { UserResponseDto } from './interfaces/userResponseDto.interface';
 
 @Controller('/user')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) { }
+  constructor(private readonly usersService: UsersService) {}
 
   @Post()
   @HttpCode(201)
@@ -34,7 +34,7 @@ export class UsersController {
   @ApiBody({ type: CreateUserDto })
   @ApiCreatedResponse({
     description: 'The user has been successfully created',
-    type: UserResponse,
+    type: UserResponseDto,
   })
   @ApiBadRequestResponse({
     description: 'The body does not contain required fields',
@@ -47,7 +47,7 @@ export class UsersController {
   @ApiOperation({ summary: 'Get all users' })
   @ApiOkResponse({
     description: 'The list of users have been successfully retrieved',
-    type: [UserResponse],
+    type: [UserResponseDto],
   })
   findAll() {
     return this.usersService.findAll();
@@ -57,7 +57,7 @@ export class UsersController {
   @ApiOperation({ summary: 'Get single user' })
   @ApiOkResponse({
     description: 'The user has been successfully retrieved',
-    type: UserResponse,
+    type: UserResponseDto,
   })
   @ApiBadRequestResponse({ description: 'The id is invalid (not uuid)' })
   @ApiNotFoundResponse({ description: "The id doesn't exist" })
@@ -70,7 +70,7 @@ export class UsersController {
   @ApiBody({ type: UpdatePasswordDto })
   @ApiOkResponse({
     description: "The user's password has been successfully updated",
-    type: UserResponse,
+    type: UserResponseDto,
   })
   @ApiBadRequestResponse({ description: 'The id is invalid (not uuid)' })
   @ApiNotFoundResponse({ description: "The id doesn't exist" })
