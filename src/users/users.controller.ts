@@ -26,7 +26,7 @@ import { UserResponse } from './interfaces/user.interface';
 
 @Controller('/user')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(private readonly usersService: UsersService) { }
 
   @Post()
   @HttpCode(201)

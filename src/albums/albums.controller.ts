@@ -24,7 +24,7 @@ import { AlbumResponse } from './interfaces/albums.interface';
 
 @Controller('/album')
 export class AlbumsController {
-  constructor(private readonly albumsService: AlbumsService) {}
+  constructor(private readonly albumsService: AlbumsService) { }
 
   @Post()
   @HttpCode(201)
