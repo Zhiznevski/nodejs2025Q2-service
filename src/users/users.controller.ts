@@ -22,7 +22,7 @@ import {
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdatePasswordDto } from './dto/update-user-password.dto';
-import { UserResponseDto } from './interfaces/userResponseDto.interface';
+import { UserResponseDto } from './dto/user-response.dto';
 
 @Controller('/user')
 export class UsersController {

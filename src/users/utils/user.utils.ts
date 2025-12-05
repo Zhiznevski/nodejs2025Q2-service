@@ -1,4 +1,4 @@
-import { UserResponseDto } from '../interfaces/userResponseDto.interface';
+import { UserResponseDto } from '../dto/user-response.dto';
 import { User } from '../user.entity';
 
 export const mapUserToUserResponseDto = (user: User): UserResponseDto => ({

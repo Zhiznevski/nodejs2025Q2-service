@@ -20,7 +20,7 @@ import {
 } from '@nestjs/swagger';
 import { CreateUpdateTrackDto } from './dto/create-update-track.dto';
 import { TracksService } from './tracks.service';
-import { TrackResponse } from './interfaces/track.interface';
+import { TrackResponseDto } from './dto/track-response.dto';
 
 @Controller('/track')
 export class TracksController {
@@ -32,7 +32,7 @@ export class TracksController {
   @ApiBody({ type: CreateUpdateTrackDto })
   @ApiCreatedResponse({
     description: 'The track has been successfully created',
-    type: TrackResponse,
+    type: TrackResponseDto,
   })
   create(@Body() createTrackDto: CreateUpdateTrackDto) {
     return this.tracksService.create(createTrackDto);
@@ -42,7 +42,7 @@ export class TracksController {
   @ApiOperation({ summary: 'Get all tracks' })
   @ApiOkResponse({
     description: 'The list of tracks have been successfully retrieved',
-    type: [TrackResponse],
+    type: [TrackResponseDto],
   })
   findAll() {
     return this.tracksService.findAll();
@@ -52,7 +52,7 @@ export class TracksController {
   @ApiOperation({ summary: 'Get single track' })
   @ApiOkResponse({
     description: 'The track has been successfully retrieved',
-    type: TrackResponse,
+    type: TrackResponseDto,
   })
   @ApiBadRequestResponse({ description: 'The id is invalid (not uuid)' })
   @ApiNotFoundResponse({ description: "The id doesn't exist" })
@@ -64,7 +64,7 @@ export class TracksController {
   @ApiOperation({ summary: 'Update the track' })
   @ApiOkResponse({
     description: 'The track has been successfully updated',
-    type: TrackResponse,
+    type: TrackResponseDto,
   })
   @ApiBadRequestResponse({ description: 'The id is invalid (not uuid)' })
   @ApiNotFoundResponse({ description: "The id doesn't exist" })

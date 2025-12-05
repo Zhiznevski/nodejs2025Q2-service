@@ -9,7 +9,7 @@ import { User } from './user.entity';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdatePasswordDto } from './dto/update-user-password.dto';
 import { mapUserToUserResponseDto } from './utils/user.utils';
-import { UserResponseDto } from './interfaces/userResponseDto.interface';
+import { UserResponseDto } from './dto/user-response.dto';
 
 @Injectable()
 export class UsersService {

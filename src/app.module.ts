@@ -9,6 +9,7 @@ import { FavoritesModule } from './favorites/favorites.module';
 import { User } from './users/user.entity';
 import { Artist } from './artists/artist.entity';
 import { Album } from './albums/album.entity';
+import { Track } from './tracks/track.entity';
 
 @Module({
   imports: [
@@ -19,7 +20,7 @@ import { Album } from './albums/album.entity';
       username: process.env.DB_USER,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
-      entities: [User, Artist, Album],
+      entities: [User, Artist, Album, Track],
       synchronize: true,
     }),
     UsersModule,

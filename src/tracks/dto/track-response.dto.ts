@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export class Track {
+export class TrackResponseDto {
   @ApiProperty()
   id: string;
 
@@ -16,5 +16,3 @@ export class Track {
   @ApiProperty()
   duration: number;
 }
-
-export class TrackResponse extends Track {}

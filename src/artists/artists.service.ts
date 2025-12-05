@@ -3,15 +3,11 @@ import { In, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ArtistResponseDto } from './interfaces/artistResponseDto.interface';
 import { CreateUpdateArtistDto } from './dto/create-update-artist.dto';
-import { TracksService } from 'src/tracks/tracks.service';
-import { AlbumsService } from 'src/albums/albums.service';
 import { Artist } from './artist.entity';
 
 @Injectable()
 export class ArtistsService {
   constructor(
-    private readonly tracksService: TracksService,
-    private readonly albumsService: AlbumsService,
     @InjectRepository(Artist)
     private readonly artistsRepository: Repository<Artist>,
   ) {}

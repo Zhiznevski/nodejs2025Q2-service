@@ -20,7 +20,7 @@ import {
 } from '@nestjs/swagger';
 import { CreateUpdateAlbumDto } from './dto/create-update-album.dto';
 import { AlbumsService } from './albums.service';
-import { AlbumResponseDto } from './interfaces/albumResponseDto.interface';
+import { AlbumResponseDto } from './dto/album-response.dto';
 
 @Controller('/album')
 export class AlbumsController {
