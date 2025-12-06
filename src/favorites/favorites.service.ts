@@ -3,7 +3,7 @@ import {
   UnprocessableEntityException,
   NotFoundException,
 } from '@nestjs/common';
-import { AddRecordToFavoritesResponse } from './interfaces/favorites.interface';
+import { AddRecordToFavoritesResponseDto } from './dto/favorites.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { In, Repository } from 'typeorm';
 import { Artist } from 'src/artists/artist.entity';
@@ -47,7 +47,7 @@ export class FavoritesService {
     return { albums, artists, tracks };
   }
 
-  async addTrack(id: string): Promise<AddRecordToFavoritesResponse> {
+  async addTrack(id: string): Promise<AddRecordToFavoritesResponseDto> {
     const track = await this.tracksRepository.findOneBy({ id });
     if (!track) {
       throw new UnprocessableEntityException("The track doesn't exist");
@@ -68,7 +68,7 @@ export class FavoritesService {
     await this.favoritesRepository.save(favorites);
   }
 
-  async addAlbum(id: string): Promise<AddRecordToFavoritesResponse> {
+  async addAlbum(id: string): Promise<AddRecordToFavoritesResponseDto> {
     const album = await this.albumsRepository.findOneBy({ id });
     if (!album) {
       throw new UnprocessableEntityException("The album doesn't exist");
@@ -89,7 +89,7 @@ export class FavoritesService {
     await this.favoritesRepository.save(favorites);
   }
 
-  async addArtist(id: string): Promise<AddRecordToFavoritesResponse> {
+  async addArtist(id: string): Promise<AddRecordToFavoritesResponseDto> {
     const artist = await this.artistsRepository.findOneBy({ id });
     if (!artist) {
       throw new UnprocessableEntityException("The artist doesn't exist");

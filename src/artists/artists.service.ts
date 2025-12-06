@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { In, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-import { ArtistResponseDto } from './interfaces/artistResponseDto.interface';
+import { ArtistResponseDto } from './dto/artist-response.dto';
 import { CreateUpdateArtistDto } from './dto/create-update-artist.dto';
 import { Artist } from './artist.entity';
 

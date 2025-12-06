@@ -20,7 +20,7 @@ import {
 } from '@nestjs/swagger';
 import { ArtistsService } from './artists.service';
 import { CreateUpdateArtistDto } from './dto/create-update-artist.dto';
-import { ArtistResponseDto } from './interfaces/artistResponseDto.interface';
+import { ArtistResponseDto } from './dto/artist-response.dto';
 @Controller('/artist')
 export class ArtistsController {
   constructor(private readonly artistsService: ArtistsService) {}

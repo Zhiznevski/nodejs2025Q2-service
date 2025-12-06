@@ -17,7 +17,7 @@ import {
   ApiUnprocessableEntityResponse,
 } from '@nestjs/swagger';
 import { FavoritesService } from './favorites.service';
-import { GetFavoritesResponse } from './interfaces/favorites.interface';
+import { GetFavoritesResponseDto } from './dto/favorites.dto';
 
 @Controller('/favs')
 export class FavoritesController {
@@ -27,7 +27,7 @@ export class FavoritesController {
   @ApiOperation({ summary: 'Get all favorites' })
   @ApiOkResponse({
     description: 'The list of favorites have been successfully retrieved',
-    type: [GetFavoritesResponse],
+    type: [GetFavoritesResponseDto],
   })
   async getFavorites() {
     return this.favoritesService.getFavorites();
