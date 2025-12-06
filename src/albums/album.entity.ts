@@ -1,5 +1,5 @@
-import { Artist } from 'src/artists/artist.entity';
-import { Track } from 'src/tracks/track.entity';
+import { Artist } from '../artists/artist.entity';
+import { Track } from '../tracks/track.entity';
 import {
   Column,
   Entity,
