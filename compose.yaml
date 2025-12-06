@@ -18,7 +18,8 @@ services:
     environment:
       NODE_ENV: production
     ports:
-      - 4000:4000
+      - ${PORT}:${PORT}
+    restart: on-failure
     # The commented out section below is an example of how to define a PostgreSQL
     # database that your application can use. `depends_on` tells Docker Compose to
     # start the database before your application. The `db-data` volume persists the
@@ -40,6 +41,7 @@ services:
       POSTGRES_PASSWORD: ${DB_PASSWORD}
     volumes:
       - db-data:/var/lib/postgresql
+      - db-logs:/var/log/postgresql
     env_file:
       - .env
     ports:
@@ -49,8 +51,14 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    command: >
+      postgres
+        -c logging_collector=on
+        -c log_directory=/var/log/postgresql
+        -c log_filename='postgresql-%a.log'
 volumes:
   db-data:
+  db-logs:
 
 networks:
   home-library-net:
