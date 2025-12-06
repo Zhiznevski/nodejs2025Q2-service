@@ -69,4 +69,4 @@ COPY --from=build /usr/src/app/dist ./dist
 EXPOSE 4000
 
 # Run the application.
-CMD ["node", "dist/main"]
+CMD ["node", "dist/src/main"]
