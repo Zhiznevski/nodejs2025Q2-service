@@ -22,7 +22,14 @@
     "test:refresh": "cross-env TEST_MODE=auth jest --testPathPattern refresh.e2e.spec.ts --noStackTrace --runInBand",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
-    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand"
+    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+    "audit": "npm audit --audit-level=high",
+    "audit:image": "docker scout cves nodejs2025q2-service-server:latest",
+    "typeorm": "typeorm -d dist/db/datasource.js",
+    "migration:run": "npm run typeorm -- migration:run",
+    "migration:revert": "npm run typeorm -- migration:revert",
+    "migration:show": "npm run typeorm -- migration:show",
+    "migration:generate": "typeorm -d db/datasource.ts migration:generate db/migrations/InitSchema"
   },
   "dependencies": {
     "@nestjs/common": "^10.4.16",
@@ -30,6 +37,8 @@
     "@nestjs/jwt": "^11.0.0",
     "@nestjs/mapped-types": "^2.1.0",
     "@nestjs/platform-express": "^10.4.15",
+    "@nestjs/swagger": "^8.1.1",
+    "@nestjs/typeorm": "^11.0.0",
     "bcrypt": "^5.1.1",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
@@ -38,6 +47,7 @@
     "reflect-metadata": "^0.2.1",
     "rimraf": "^5.0.5",
     "rxjs": "^7.8.1",
+    "typeorm": "^0.3.28",
     "uuid": "^9.0.1"
   },
   "devDependencies": {

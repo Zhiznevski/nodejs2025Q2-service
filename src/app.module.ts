@@ -1,10 +1,21 @@
+import 'dotenv/config';
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { UsersModule } from './users/users.module';
+import { ArtistsModule } from './artists/artists.module';
+import { TracksModule } from './tracks/tracks.module';
+import { AlbumsModule } from './albums/albums.module';
+import { FavoritesModule } from './favorites/favorites.module';
+import { dataSourceOptions } from 'db/datasource';
 
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [
+    TypeOrmModule.forRoot(dataSourceOptions),
+    UsersModule,
+    ArtistsModule,
+    AlbumsModule,
+    TracksModule,
+    FavoritesModule,
+  ],
 })
 export class AppModule {}
