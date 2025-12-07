@@ -4,7 +4,7 @@
 
 - Install Docker and Docker Compose (https://www.docker.com/products/docker-desktop/)
 - Git - [Download & Install Git](https://git-scm.com/downloads).
-- Node.js (optional, only if you want to run the app without Docker) - [Download & Install Node.js](https://nodejs.org/en/download/) and the npm package manager.
+- Node.js (optional, only if you want to run the app without Docker or run tests) - [Download & Install Node.js](https://nodejs.org/en/download/) and the npm package manager.
 
 ## Downloading
 
@@ -43,9 +43,10 @@ docker compose down
 
 ## Testing
 
-- Make sure containers are running:
+- Make sure containers are running and deps are installed:
 
 ```
+npm install
 docker compose up --build -d
 docker compose exec server npm run migration:run
 ```
