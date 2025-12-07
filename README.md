@@ -4,7 +4,7 @@
 
 - Install Docker and Docker Compose (https://www.docker.com/products/docker-desktop/)
 - Git - [Download & Install Git](https://git-scm.com/downloads).
-- Node.js (optional, only if you want to run the app without Docker or run tests) - [Download & Install Node.js](https://nodejs.org/en/download/) and the npm package manager.
+- Node.js (optional, only if you want to run the app without Docker, run tests or linter) - [Download & Install Node.js](https://nodejs.org/en/download/) and the npm package manager.
 
 ## Downloading
 
@@ -58,6 +58,9 @@ npm run test
 ```
 
 ### Auto-fix and format
+```
+npm install
+```
 
 ```
 npm run lint
