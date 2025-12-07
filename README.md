@@ -73,5 +73,13 @@ npm run format
 ### Debugging in VSCode
 
 Press <kbd>F5</kbd> to debug.
-
 For more information, visit: https://code.visualstudio.com/docs/editor/debugging
+
+### Docker application image size
+<img width="1173" height="81" alt="image" src="https://github.com/user-attachments/assets/3962cac3-247d-4d6e-8083-50fb2620faeb" />
+
+### Docker hub deploy 
+
+```
+https://hub.docker.com/repository/docker/zhiznevski/home-library-service/
+```
