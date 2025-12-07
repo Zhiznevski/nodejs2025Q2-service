@@ -24,6 +24,7 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "audit": "npm audit --audit-level=high",
+    "audit:image": "docker scout cves nodejs2025q2-service-server:latest",
     "typeorm": "typeorm -d dist/db/datasource.js",
     "migration:run": "npm run typeorm -- migration:run",
     "migration:revert": "npm run typeorm -- migration:revert",
