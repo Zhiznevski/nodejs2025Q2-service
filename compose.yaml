@@ -37,7 +37,7 @@ services:
           ignore:
             - node_modules/
         - action: rebuild
-          path: package.json
+          path: src
   db:
     image: postgres
     networks:
