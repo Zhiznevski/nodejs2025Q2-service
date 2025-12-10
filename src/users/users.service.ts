@@ -16,7 +16,7 @@ export class UsersService {
   constructor(
     @InjectRepository(User)
     private readonly usersRepository: Repository<User>,
-  ) {}
+  ) { }
 
   private async _findById(id: string): Promise<User> {
     const user = await this.usersRepository.findOneBy({ id });
@@ -25,7 +25,13 @@ export class UsersService {
     }
     return user;
   }
-
+  async findByLogin(login: string): Promise<User> {
+    const user = await this.usersRepository.findOneBy({ login });
+    if (!user) {
+      throw new NotFoundException('The user is not found');
+    }
+    return user;
+  }
   async findAll(): Promise<UserResponseDto[]> {
     const users = await this.usersRepository.find();
     return users.map(mapUserToUserResponseDto);

@@ -7,6 +7,7 @@ import { TracksModule } from './tracks/tracks.module';
 import { AlbumsModule } from './albums/albums.module';
 import { FavoritesModule } from './favorites/favorites.module';
 import { dataSourceOptions } from 'db/datasource';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { dataSourceOptions } from 'db/datasource';
     AlbumsModule,
     TracksModule,
     FavoritesModule,
+    AuthModule,
   ],
 })
 export class AppModule {}
