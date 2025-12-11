@@ -3,6 +3,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 export const setupSwagger = (app: INestApplication) => {
   const config = new DocumentBuilder()
+    .addBearerAuth()
     .setTitle('REST Service')
     .setDescription('Home Library Service')
     .setVersion('1.0')

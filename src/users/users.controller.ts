@@ -18,6 +18,7 @@ import {
   ApiNotFoundResponse,
   ApiForbiddenResponse,
   ApiNoContentResponse,
+  ApiBearerAuth,
 } from '@nestjs/swagger';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -43,6 +44,7 @@ export class UsersController {
     return this.usersService.create(createUserDto);
   }
 
+  @ApiBearerAuth('access-token')
   @Get()
   @ApiOperation({ summary: 'Get all users' })
   @ApiOkResponse({

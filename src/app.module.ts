@@ -12,12 +12,12 @@ import { AuthModule } from './auth/auth.module';
 @Module({
   imports: [
     TypeOrmModule.forRoot(dataSourceOptions),
+    AuthModule,
     UsersModule,
     ArtistsModule,
     AlbumsModule,
     TracksModule,
     FavoritesModule,
-    AuthModule,
   ],
 })
-export class AppModule {}
+export class AppModule { }

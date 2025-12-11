@@ -1,7 +1,7 @@
 import { IsString, MinLength } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
-export class CreateUserDto {
+export class SignInUserDto {
   @ApiProperty({
     minLength: 4,
     example: 'John Dory',
@@ -17,4 +17,15 @@ export class CreateUserDto {
   @IsString()
   @MinLength(4)
   readonly password: string;
+}
+
+export class SignInResponseDto {
+  @ApiProperty()
+  accessToken: string;
+}
+
+export class SignUpUserDto extends SignInUserDto {}
+export class SignUpResponseDto {
+  @ApiProperty()
+  message: string;
 }
