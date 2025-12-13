@@ -27,7 +27,7 @@ import { UserResponseDto } from './dto/user-response.dto';
 
 @Controller('/user')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(private readonly usersService: UsersService) { }
 
   @Post()
   @HttpCode(201)
@@ -44,7 +44,6 @@ export class UsersController {
     return this.usersService.create(createUserDto);
   }
 
-  @ApiBearerAuth('access-token')
   @Get()
   @ApiOperation({ summary: 'Get all users' })
   @ApiOkResponse({
