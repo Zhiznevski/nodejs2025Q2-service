@@ -4,7 +4,9 @@ import { LoggingService } from "./logger.service";
 
 @Injectable()
 export class LoggerMiddleware implements NestMiddleware {
-  private logger = new LoggingService("HTTP");
+
+  constructor(private readonly loggingService: LoggingService) {
+  }
 
   use(request: Request, response: Response, next: NextFunction): void {
     const { method, originalUrl, query, body } = request;
@@ -12,7 +14,7 @@ export class LoggerMiddleware implements NestMiddleware {
     response.on("finish", () => {
       const { statusCode } = response;
 
-      this.logger.log(
+      this.loggingService.log(
         `method: ${method}, url: ${originalUrl}, statusCode: ${statusCode}, query: ${JSON.stringify(query)}, body: ${JSON.stringify(body)}`,
       );
     });

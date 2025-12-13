@@ -9,6 +9,7 @@ import { FavoritesModule } from './favorites/favorites.module';
 import { dataSourceOptions } from 'db/datasource';
 import { AuthModule } from './auth/auth.module';
 import { LoggerMiddleware } from './logger/logger.middleware';
+import { LoggingService } from './logger/logger.service';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { LoggerMiddleware } from './logger/logger.middleware';
     TracksModule,
     FavoritesModule,
   ],
+  providers: [LoggingService]
 })
 
 export class AppModule implements NestModule {
