@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { Injectable, NestMiddleware, Logger } from "@nestjs/common";
+import { Injectable, NestMiddleware } from "@nestjs/common";
 import { LoggingService } from "./logger.service";
 
 @Injectable()
