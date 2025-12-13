@@ -21,9 +21,8 @@ import { LoggingService } from './logger/logger.service';
     TracksModule,
     FavoritesModule,
   ],
-  providers: [LoggingService]
+  providers: [LoggingService],
 })
-
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer.apply(LoggerMiddleware).forRoutes('*');

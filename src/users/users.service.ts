@@ -19,7 +19,7 @@ export class UsersService {
     @InjectRepository(User)
     private readonly usersRepository: Repository<User>,
     private loggingService: LoggingService,
-  ) { }
+  ) {}
 
   private async _findById(id: string): Promise<User> {
     const user = await this.usersRepository.findOneBy({ id });
@@ -37,7 +37,6 @@ export class UsersService {
   }
   async findAll(): Promise<UserResponseDto[]> {
     const users = await this.usersRepository.find();
-    this.loggingService.log(users)
     return users.map(mapUserToUserResponseDto);
   }
 

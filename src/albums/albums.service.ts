@@ -9,7 +9,7 @@ export class AlbumsService {
   constructor(
     @InjectRepository(Album)
     private readonly albumsRepository: Repository<Album>,
-  ) { }
+  ) {}
 
   private async _findById(id: string) {
     const album = await this.albumsRepository.findOneBy({ id });
