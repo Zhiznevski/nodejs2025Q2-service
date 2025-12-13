@@ -22,6 +22,8 @@ export class SignInUserDto {
 export class SignInResponseDto {
   @ApiProperty()
   accessToken: string;
+
+  @ApiProperty()
   refreshToken: string;
 }
 
@@ -30,3 +32,10 @@ export class SignUpResponseDto {
   @ApiProperty()
   message: string;
 }
+
+export class RefreshTokenDto {
+  @ApiProperty()
+  refreshToken: string;
+}
+
+export class RefreshTokenResponseDto extends SignInResponseDto {}
