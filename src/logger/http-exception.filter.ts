@@ -9,9 +9,7 @@ import { LoggingService } from './logger.service';
 
 @Catch(HttpException)
 export class HttpExceptionFilter implements ExceptionFilter {
-  constructor(private readonly loggingService: LoggingService) {
-
-  }
+  constructor(private readonly loggingService: LoggingService) {}
   catch(exception: HttpException, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
@@ -24,8 +22,8 @@ export class HttpExceptionFilter implements ExceptionFilter {
       statusCode: status,
       timestamp: new Date().toISOString(),
       path: request.url,
-    }
-    this.loggingService.error(res)
+    };
+    this.loggingService.error(res);
     response.status(status).json(res);
   }
 }

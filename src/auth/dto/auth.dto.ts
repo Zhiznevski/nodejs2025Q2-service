@@ -22,6 +22,7 @@ export class SignInUserDto {
 export class SignInResponseDto {
   @ApiProperty()
   accessToken: string;
+  refreshToken: string;
 }
 
 export class SignUpUserDto extends SignInUserDto {}
