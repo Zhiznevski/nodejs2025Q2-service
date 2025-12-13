@@ -1,7 +1,4 @@
-import {
-  ForbiddenException,
-  Injectable
-} from '@nestjs/common';
+import { ForbiddenException, Injectable } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import { checkPassword } from 'src/utils/bcrypt';
@@ -15,8 +12,8 @@ export class AuthService {
 
   async signIn(login: string, pass: string): Promise<{ accessToken: string }> {
     const user = await this.usersService.findByLogin(login);
-    const isPasswordsMatch = await checkPassword(pass, user.password)
-    if (isPasswordsMatch) {
+    const isPasswordsMatch = await checkPassword(pass, user.password);
+    if (!isPasswordsMatch) {
       throw new ForbiddenException();
     }
 

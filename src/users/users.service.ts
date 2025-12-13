@@ -11,12 +11,14 @@ import { UpdatePasswordDto } from './dto/update-user-password.dto';
 import { mapUserToUserResponseDto } from './utils/user.utils';
 import { UserResponseDto } from './dto/user-response.dto';
 import { checkPassword, hashPassword } from 'src/utils/bcrypt';
+import { LoggingService } from 'src/logger/logger.service';
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(User)
     private readonly usersRepository: Repository<User>,
+    private loggingService: LoggingService,
   ) { }
 
   private async _findById(id: string): Promise<User> {
@@ -35,7 +37,8 @@ export class UsersService {
   }
   async findAll(): Promise<UserResponseDto[]> {
     const users = await this.usersRepository.find();
-    return users.map(mapUserToUserResponseDto)
+    this.loggingService.log(users)
+    return users.map(mapUserToUserResponseDto);
   }
 
   async findOne(id: string): Promise<UserResponseDto> {
@@ -60,11 +63,11 @@ export class UsersService {
     const user = await this._findById(id);
     const { oldPassword, newPassword } = userDto;
 
-    const isPasswordsMatch = await checkPassword(oldPassword, user.password)
+    const isPasswordsMatch = await checkPassword(oldPassword, user.password);
     if (!isPasswordsMatch) {
       throw new ForbiddenException("Passwords don't match");
     }
-    const newHashedPassword = await hashPassword(newPassword)
+    const newHashedPassword = await hashPassword(newPassword);
     Object.assign(user, {
       password: newHashedPassword,
     });
