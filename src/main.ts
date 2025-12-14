@@ -16,7 +16,9 @@ async function bootstrap() {
   setupSwagger(app);
 
   process.on('uncaughtException', (error) => {
-    loggerService.error(`Uncaught exception: ${JSON.stringify(error)}`);
+    loggerService.error(
+      `Uncaught exception: ${JSON.stringify(error.message)} ${JSON.stringify(error.stack)}`,
+    );
   });
 
   process.on('unhandledRejection', (reason) => {

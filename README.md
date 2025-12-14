@@ -41,6 +41,8 @@ docker compose exec server npm run migration:run
 docker compose down
 ```
 
+## Writing logs to files
+
 ## Running application in Development mode
 
 - To automatically synchronizes changes in /src folder:

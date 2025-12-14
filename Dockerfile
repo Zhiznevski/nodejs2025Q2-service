@@ -28,12 +28,15 @@ FROM base AS final
 
 ENV NODE_ENV production
 
-USER node
-
 COPY package.json .
 
 COPY --from=deps /usr/src/app/node_modules ./node_modules
 COPY --from=build /usr/src/app/dist ./dist
+
+
+RUN mkdir -p /usr/src/app/logs && chown -R node:node /usr/src/app/logs
+
+USER node
 
 
 EXPOSE 4000

@@ -14,6 +14,8 @@ services:
     depends_on:
       db:
         condition: service_healthy
+    volumes:
+      - app-logs:/usr/src/app/logs
     develop:
       watch:
         - action: sync
@@ -53,6 +55,7 @@ services:
 volumes:
   db-data:
   db-logs:
+  app-logs:
 
 networks:
   home-library-net:
