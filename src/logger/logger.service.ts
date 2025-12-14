@@ -1,11 +1,18 @@
-import { Injectable, ConsoleLogger, LoggerService } from '@nestjs/common';
+import {
+  Injectable,
+  ConsoleLogger,
+  LoggerService,
+  LogLevel,
+} from '@nestjs/common';
 
 @Injectable()
 export class LoggingService extends ConsoleLogger implements LoggerService {
+  private readonly logLevels: LogLevel[] = [];
   constructor(context?: string) {
-    super();
-    this.setContext(context);
-    this.setLogLevels(['warn', 'error', 'debug']);
+    super(context);
+    this.logLevels = process.env.LOGGING_LEVELS?.split(', ') as LogLevel[];
+    console.log(this.logLevels);
+    this.setLogLevels(this.logLevels);
   }
 
   log(message: any) {

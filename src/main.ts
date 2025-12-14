@@ -1,28 +1,26 @@
 import 'dotenv/config';
-import { NestFactory } from '@nestjs/core';
+import { HttpAdapterHost, NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { setupSwagger } from './swagger';
 import { LoggingService } from './logger/logger.service';
-import { HttpExceptionFilter } from './logger/http-exception.filter';
+import { AllExceptionsFilter } from './logger/all-exceptions.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, { bufferLogs: true });
   app.useLogger(app.get(LoggingService));
   app.useGlobalPipes(new ValidationPipe());
-  const loggerService = await app.resolve(LoggingService);
-  app.useGlobalFilters(new HttpExceptionFilter(loggerService));
+  const loggerService = app.get(LoggingService);
+  const httpAdapterHost = app.get(HttpAdapterHost);
+  app.useGlobalFilters(new AllExceptionsFilter(httpAdapterHost, loggerService));
   setupSwagger(app);
 
-  process.on('uncaughtException', (error, origin) => {
-    loggerService.error(`${process.stderr.fd}, Caught Exception: ${error}\n +
-        Exception origin: ${origin}\n`);
+  process.on('uncaughtException', (error) => {
+    loggerService.error(`Uncaught exception: ${JSON.stringify(error)}`);
   });
 
-  process.on('unhandledRejection', (reason, promise) => {
-    loggerService.error(
-      `Unhandled Rejection at:', ${JSON.stringify(promise)}, reason:, ${JSON.stringify(reason)}`,
-    );
+  process.on('unhandledRejection', (reason) => {
+    loggerService.error(`Unhandled rejection: ${JSON.stringify(reason)}`);
   });
 
   await app.listen(process.env.PORT || 4000);
