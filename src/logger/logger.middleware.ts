@@ -13,7 +13,7 @@ export class LoggerMiddleware implements NestMiddleware {
       const { statusCode } = response;
 
       this.loggingService.log(
-        `method: ${method}, url: ${originalUrl}, statusCode: ${statusCode}, query: ${JSON.stringify(query)}`,
+        `method: ${method}, url: ${originalUrl}, statusCode: ${statusCode}, query: ${JSON.stringify(query)}, body: ${JSON.stringify(request.body)}`,
       );
     });
 
