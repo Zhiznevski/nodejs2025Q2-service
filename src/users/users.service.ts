@@ -11,14 +11,12 @@ import { UpdatePasswordDto } from './dto/update-user-password.dto';
 import { mapUserToUserResponseDto } from './utils/user.utils';
 import { UserResponseDto } from './dto/user-response.dto';
 import { checkPassword, hashPassword } from 'src/utils/bcrypt';
-import { LoggingService } from 'src/logger/logger.service';
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(User)
     private readonly usersRepository: Repository<User>,
-    private loggingService: LoggingService,
   ) {}
 
   private async _findById(id: string): Promise<User> {
@@ -31,7 +29,7 @@ export class UsersService {
   async findByLogin(login: string): Promise<User> {
     const user = await this.usersRepository.findOneBy({ login });
     if (!user) {
-      throw new NotFoundException('The user is not found');
+      return null;
     }
     return user;
   }

@@ -12,6 +12,7 @@ import {
   ApiBody,
   ApiOkResponse,
   ApiOperation,
+  ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
 import {
@@ -24,13 +25,13 @@ import {
 } from './dto/auth.dto';
 import { Public } from './decorators/public.decorator';
 import { LocalAuthGuard } from './local-auth.guard';
-import { JwtRefreshAuthGuard } from './jwt-refresh.guard';
+import { UserResponseDto } from 'src/users/dto/user-response.dto';
 
 @Controller('/auth')
 export class AuthController {
   constructor(private authService: AuthService) { }
 
-  // @Public()
+  @Public()
   @UseGuards(LocalAuthGuard)
   @Post('login')
   @HttpCode(HttpStatus.OK)
@@ -44,7 +45,8 @@ export class AuthController {
     description: 'The body does not contain required fields',
   })
   signIn(@Req() req) {
-    return this.authService.signIn(req.user);
+    const user = req.user as UserResponseDto;
+    return this.authService.signIn(user);
   }
 
   @Public()
@@ -63,8 +65,8 @@ export class AuthController {
     return this.authService.signUp(signUpUserDto.login, signUpUserDto.password);
   }
 
+  @Public()
   @Post('refresh')
-  @UseGuards(JwtRefreshAuthGuard)
   @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'Refresh token' })
   @ApiBody({ type: RefreshTokenDto })
@@ -72,10 +74,10 @@ export class AuthController {
     description: 'Access and refresh tokens are successfully retrieved',
     type: RefreshTokenResponseDto,
   })
-  @ApiBadRequestResponse({
+  @ApiUnauthorizedResponse({
     description: 'The body does not contain refresh token',
   })
-  async refresh(@Req() req) {
-    return this.authService.refresh(req.user);
+  async refresh(@Body() refreshTokenDto: RefreshTokenDto) {
+    return this.authService.refresh(refreshTokenDto.refreshToken);
   }
 }

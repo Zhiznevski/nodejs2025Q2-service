@@ -1,4 +1,8 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  ForbiddenException,
+} from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import { checkPassword } from 'src/utils/bcrypt';
@@ -34,7 +38,7 @@ export class AuthService {
   }
 
   async validateUser(login: string, pass: string) {
-    const user = await this.usersService.findByLogin(login); // What if logins are same?
+    const user = await this.usersService.findByLogin(login);
     if (user && (await checkPassword(pass, user.password))) {
       return mapUserToUserResponseDto(user);
     }
@@ -42,19 +46,12 @@ export class AuthService {
   }
 
   async signIn(user: UserResponseDto): Promise<SignInResponseDto> {
-    const payload = { sub: user.id, username: user.login };
-    return {
-      accessToken: await this.jwtService.signAsync(payload),
-      refreshToken: await this.jwtService.signAsync(payload, {
-        expiresIn: jwtConstants.refreshTokenExpireTime,
-        secret: jwtConstants.jwtRefreshSecretKey,
-      }),
-    };
+    const userExists = await this.usersService.findByLogin(user.login);
+    return this._getTokens(user.id, user.login);
   }
 
   async signUp(login: string, pass: string) {
     const userExists = await this.usersService.findByLogin(login);
-
     if (userExists) {
       throw new BadRequestException('User already exists');
     }
@@ -62,7 +59,16 @@ export class AuthService {
     return { id: user.id, login: user.login };
   }
 
-  async refresh({ userId, login }: { userId: string, login: string }) {
-    return this._getTokens(userId, login)
+  async refresh(refreshToken: string) {
+    try {
+      const payload = await this.jwtService.verifyAsync(refreshToken, {
+        secret: jwtConstants.jwtRefreshSecretKey,
+      });
+      const userId = payload.sub;
+      const login = payload.username;
+      return this._getTokens(userId, login);
+    } catch (e) {
+      throw new ForbiddenException('Refresh token is invalid or expired');
+    }
   }
 }
