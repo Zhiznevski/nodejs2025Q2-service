@@ -43,7 +43,8 @@ docker compose down
 
 ## Writing logs to files
 
-- Check logs in Docker Desktop -> volumes -> nodejs2025q2-service_app-logs -> app.log
+- Check logs in Docker Desktop -> volumes -> nodejs2025q2-service_app-logs -> app.log and error.log
+
 - Or use command -
 
 ```
