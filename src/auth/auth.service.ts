@@ -16,7 +16,7 @@ export class AuthService {
   constructor(
     private usersService: UsersService,
     private jwtService: JwtService,
-  ) { }
+  ) {}
 
   async _getTokens(userId: string, login: string) {
     const payload = { sub: userId, username: login };

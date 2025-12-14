@@ -9,7 +9,7 @@ import { LoggingService } from './logger.service';
 
 @Catch(HttpException)
 export class HttpExceptionFilter implements ExceptionFilter {
-  constructor(private readonly loggingService: LoggingService) { }
+  constructor(private readonly loggingService: LoggingService) {}
   catch(exception: HttpException, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();

@@ -14,16 +14,16 @@ async function bootstrap() {
   app.useGlobalFilters(new HttpExceptionFilter(loggerService));
   setupSwagger(app);
 
-  process.on("uncaughtException", (error, origin) => {
+  process.on('uncaughtException', (error, origin) => {
     loggerService.error(`${process.stderr.fd}, Caught Exception: ${error}\n +
-        Exception origin: ${origin}\n`,
-    )
-  })
+        Exception origin: ${origin}\n`);
+  });
 
-  process.on("unhandledRejection", (reason, promise) => {
-    loggerService.error(`Unhandled Rejection at:', ${promise}, reason:, ${reason}`)
-  }
-  )
+  process.on('unhandledRejection', (reason, promise) => {
+    loggerService.error(
+      `Unhandled Rejection at:', ${JSON.stringify(promise)}, reason:, ${JSON.stringify(reason)}`,
+    );
+  });
 
   await app.listen(process.env.PORT || 4000);
 }
