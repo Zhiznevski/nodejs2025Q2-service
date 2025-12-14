@@ -43,6 +43,9 @@ docker compose down
 
 ## Writing logs to files
 
+- Check logs in Docker Desktop -> volumes -> nodejs2025q2-service_app-logs -> app.log
+- Or use command - docker compose exec server sh -lc "tail -n 50 /usr/src/app/logs/app.log"
+
 ## Running application in Development mode
 
 - To automatically synchronizes changes in /src folder:
