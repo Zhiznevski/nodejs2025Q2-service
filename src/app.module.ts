@@ -10,6 +10,7 @@ import { dataSourceOptions } from 'db/datasource';
 import { AuthModule } from './auth/auth.module';
 import { LoggerMiddleware } from './logger/logger.middleware';
 import { LoggingService } from './logger/logger.service';
+import { AppController } from './app.controller';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { LoggingService } from './logger/logger.service';
     TracksModule,
     FavoritesModule,
   ],
+  controllers: [AppController],
   providers: [LoggingService],
 })
 export class AppModule implements NestModule {
