@@ -1,21 +1,13 @@
-import {
-  Injectable,
-  ConsoleLogger,
-  LoggerService,
-  LogLevel,
-} from '@nestjs/common';
+import { Injectable, ConsoleLogger, LoggerService } from '@nestjs/common';
 import { FileWriterService } from './file-writer.service';
-import { formatLogMessage } from './logger-helpers';
+import { formatLogMessage, getLogLevels } from './logger-helpers';
 
 @Injectable()
 export class LoggingService extends ConsoleLogger implements LoggerService {
-  private readonly logLevels: LogLevel[] = [];
   constructor(private readonly fileWriter: FileWriterService) {
     super();
-    this.logLevels = process.env.LOGGING_LEVELS?.split(',')
-      .map((level) => level.trim())
-      .filter(Boolean) as LogLevel[];
-    this.setLogLevels(this.logLevels);
+    const levels = getLogLevels(Number(process.env.LOG_LEVEL));
+    this.setLogLevels(levels);
   }
 
   log(message: any) {
