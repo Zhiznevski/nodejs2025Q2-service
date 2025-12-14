@@ -5,6 +5,7 @@ import {
   HttpStatus,
   Post,
   Req,
+  UnauthorizedException,
   UseGuards,
 } from '@nestjs/common';
 import {
@@ -78,6 +79,9 @@ export class AuthController {
     description: 'The body does not contain refresh token',
   })
   async refresh(@Body() refreshTokenDto: RefreshTokenDto) {
+    if (!refreshTokenDto?.refreshToken) {
+      throw new UnauthorizedException('Refresh token is required');
+    }
     return this.authService.refresh(refreshTokenDto.refreshToken);
   }
 }

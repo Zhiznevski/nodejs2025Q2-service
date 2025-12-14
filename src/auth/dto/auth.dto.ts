@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString, MinLength } from 'class-validator';
+import { IsString, MinLength } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class SignInUserDto {
@@ -35,7 +35,6 @@ export class SignUpResponseDto {
 
 export class RefreshTokenDto {
   @ApiProperty()
-  @IsNotEmpty()
   refreshToken: string;
 }
 

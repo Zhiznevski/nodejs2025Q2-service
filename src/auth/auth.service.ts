@@ -19,7 +19,7 @@ export class AuthService {
   ) {}
 
   async _getTokens(userId: string, login: string) {
-    const payload = { sub: userId, username: login };
+    const payload = { userId: userId, login: login };
 
     const [accessToken, refreshToken] = await Promise.all([
       this.jwtService.signAsync(payload, {
@@ -63,8 +63,8 @@ export class AuthService {
       const payload = await this.jwtService.verifyAsync(refreshToken, {
         secret: jwtConstants.jwtRefreshSecretKey,
       });
-      const userId = payload.sub;
-      const login = payload.username;
+      const userId = payload.userId;
+      const login = payload.login;
       return this._getTokens(userId, login);
     } catch (e) {
       throw new ForbiddenException('Refresh token is invalid or expired');
