@@ -12,40 +12,51 @@ export class LoggingService extends ConsoleLogger implements LoggerService {
 
   log(message: any) {
     super.log(message);
-    this.writeToFile(message);
+    this.writeAllLogsToFile(message);
   }
 
   error(message: any) {
     super.error(message);
-    this.writeToFile(message);
+    this.writeErrorLogsToFile(message);
+    this.writeAllLogsToFile(message);
   }
 
   fatal(message: any) {
     super.fatal(message);
-    this.writeToFile(message);
+    this.writeErrorLogsToFile(message);
+    this.writeAllLogsToFile(message);
   }
 
   warn(message: any) {
     super.warn(message);
-    this.writeToFile(message);
+    this.writeAllLogsToFile(message);
   }
 
   debug(message: any) {
     super.debug(message);
-    this.writeToFile(message);
+    this.writeAllLogsToFile(message);
   }
 
   verbose(message: any) {
     super.verbose(message);
-    this.writeToFile(message);
+    this.writeAllLogsToFile(message);
   }
 
-  private async writeToFile(message: any) {
+  private async writeAllLogsToFile(message: any) {
     try {
       const line = formatLogMessage(message);
-      await this.fileWriter.appendLine(line);
+      await this.fileWriter.appendAllLogs(line);
     } catch (error) {
       super.error('Failed to write log to file', error);
+    }
+  }
+
+  private async writeErrorLogsToFile(message: any) {
+    try {
+      const line = formatLogMessage(message);
+      await this.fileWriter.appendErrorLog(line);
+    } catch (error) {
+      super.error('Failed to write error log to file', error);
     }
   }
 }
