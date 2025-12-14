@@ -29,7 +29,7 @@ import { UserResponseDto } from 'src/users/dto/user-response.dto';
 
 @Controller('/auth')
 export class AuthController {
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService) {}
 
   @Public()
   @UseGuards(LocalAuthGuard)

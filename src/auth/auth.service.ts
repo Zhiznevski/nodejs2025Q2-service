@@ -46,7 +46,6 @@ export class AuthService {
   }
 
   async signIn(user: UserResponseDto): Promise<SignInResponseDto> {
-    const userExists = await this.usersService.findByLogin(user.login);
     return this._getTokens(user.id, user.login);
   }
 

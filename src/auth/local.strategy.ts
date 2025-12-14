@@ -15,7 +15,9 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
   async validate(login: string, password: string) {
     const user = await this.authService.validateUser(login, password);
     if (!user) {
-      throw new ForbiddenException("No user with such login or password doesn't match actual one");
+      throw new ForbiddenException(
+        "No user with such login or password doesn't match actual one",
+      );
     }
     return user;
   }
