@@ -1,12 +1,13 @@
+import { ApiExcludeController } from '@nestjs/swagger';
 import { Controller, Get } from '@nestjs/common';
-import { AppService } from './app.service';
+import { Public } from './auth/decorators/public.decorator';
 
-@Controller()
+@ApiExcludeController()
+@Controller('/')
 export class AppController {
-  constructor(private readonly appService: AppService) {}
-
+  @Public()
   @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  startApp(): string {
+    return `Hello! to check app documentation, visit http://localhost:${process.env.PORT}/doc`;
   }
 }

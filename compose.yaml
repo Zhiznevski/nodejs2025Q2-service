@@ -1,0 +1,62 @@
+services:
+  server:
+    build:
+      context: .
+    networks:
+      - home-library-net
+    env_file:
+      - .env
+    environment:
+      NODE_ENV: production
+    ports:
+      - ${PORT}:${PORT}
+    restart: on-failure
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - app-logs:/usr/src/app/logs
+    develop:
+      watch:
+        - action: sync
+          path: .
+          target: /usr/src/app
+          ignore:
+            - node_modules/
+        - action: rebuild
+          path: src
+  db:
+    image: postgres
+    networks:
+      - home-library-net
+    restart: always
+    user: postgres
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - db-data:/var/lib/postgresql
+      - db-logs:/var/log/postgresql
+    env_file:
+      - .env
+    ports:
+      - ${DB_PORT}:${DB_PORT}
+    healthcheck:
+      test: ['CMD', 'pg_isready']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    command: >
+      postgres
+        -c logging_collector=on
+        -c log_directory=/var/log/postgresql
+        -c log_filename='postgresql-%a.log'
+volumes:
+  db-data:
+  db-logs:
+  app-logs:
+
+networks:
+  home-library-net:
+    driver: bridge

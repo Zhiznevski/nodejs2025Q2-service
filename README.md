@@ -2,60 +2,88 @@
 
 ## Prerequisites
 
+- Install Docker and Docker Compose (https://www.docker.com/products/docker-desktop/)
 - Git - [Download & Install Git](https://git-scm.com/downloads).
-- Node.js - [Download & Install Node.js](https://nodejs.org/en/download/) and the npm package manager.
+- Node.js (optional, only if you want to run the app without Docker, run tests or linter) - [Download & Install Node.js](https://nodejs.org/en/download/) and the npm package manager.
 
 ## Downloading
 
 ```
 git clone {repository URL}
+cd {repository folder}
 ```
 
-## Installing NPM modules
+Environment variables
+
+## ENV variables
+
+Create .env file with all necessary env variables - JWT, LOGS, DB (see .env.example).
+
+## Running application with Docker
+
+- Build and start application and database:
 
 ```
-npm install
+docker compose up --build -d
 ```
 
-## Running application
+- Run database migrations inside the server container:
 
 ```
-npm start
+docker compose exec server npm run migration:run
 ```
 
-After starting the app on port (4000 as default) you can open
-in your browser OpenAPI documentation by typing http://localhost:4000/doc/.
-For more information about OpenAPI/Swagger please visit https://swagger.io/.
+- After that the Swagger doc will be available at http://localhost:4000/doc.
+
+- To stop containers:
+
+```
+docker compose down
+```
+
+## Writing logs to files
+
+- logs are located in files inside volumes
+
+- Check logs in Docker Desktop -> volumes -> nodejs2025q2-service_app-logs -> app.log and error.log
+
+- Or use command -
+
+```
+docker compose exec server sh -lc "tail -n 50 /usr/src/app/logs/app.log && tail -n 50 /usr/src/app/logs/error.log"
+```
+
+- To change log level change LOG_LEVEL env variable( 0, 1, 2, 3 levels), 3 lvl is default
+
+## Running application in Development mode
+
+- To automatically synchronizes changes in /src folder:
+
+```
+docker compose watch
+```
 
 ## Testing
 
-After application running open new terminal and enter:
-
-To run all tests without authorization
+- Make sure containers are running and deps are installed:
 
 ```
-npm run test
+npm install
+docker compose up --build -d
+docker compose exec server npm run migration:run
 ```
 
-To run only one of all test suites
-
-```
-npm run test -- <path to suite>
-```
-
-To run all test with authorization
+- Run all tests (in separate terminal)
 
 ```
 npm run test:auth
 ```
 
-To run only specific test suite with authorization
+## Auto-fix and format
 
 ```
-npm run test:auth -- <path to suite>
+npm install
 ```
-
-### Auto-fix and format
 
 ```
 npm run lint
@@ -65,8 +93,25 @@ npm run lint
 npm run format
 ```
 
-### Debugging in VSCode
+## Vulnerabilities scanning
+
+- Make sure containers are running
+
+```
+npm run audit:image
+```
+
+## Debugging in VSCode
 
 Press <kbd>F5</kbd> to debug.
-
 For more information, visit: https://code.visualstudio.com/docs/editor/debugging
+
+## Docker application image size
+
+<img width="1173" height="81" alt="image" src="https://github.com/user-attachments/assets/3962cac3-247d-4d6e-8083-50fb2620faeb" />
+
+## Docker hub deploy
+
+```
+https://hub.docker.com/repository/docker/zhiznevski/home-library-service/
+```
