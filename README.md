@@ -17,7 +17,7 @@ Environment variables
 
 ## ENV variables
 
-Create .env file with all necessary env variables (see .env.example).
+Create .env file with all necessary env variables - JWT, LOGS, DB (see .env.example).
 
 ## Running application with Docker
 
@@ -43,6 +43,8 @@ docker compose down
 
 ## Writing logs to files
 
+- logs are located in files inside volumes
+
 - Check logs in Docker Desktop -> volumes -> nodejs2025q2-service_app-logs -> app.log and error.log
 
 - Or use command -
@@ -51,7 +53,7 @@ docker compose down
 docker compose exec server sh -lc "tail -n 50 /usr/src/app/logs/app.log && tail -n 50 /usr/src/app/logs/error.log"
 ```
 
-- To change log level change LOG_LEVEL env variable( 0, 1, 2, 3 levels)
+- To change log level change LOG_LEVEL env variable( 0, 1, 2, 3 levels), 3 lvl is default
 
 ## Running application in Development mode
 
